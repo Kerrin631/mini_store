@@ -1,0 +1,40 @@
+<div ng-controller='dashboardController'>
+
+	<h3>Dashboard</h3>
+	<div id="dashboard">
+		<div id="left">
+			<input type="Text" ng-model='filter_name.name' placeholder='filter_name'><br>
+		</div>
+
+		<div id="right">
+			<div id="product_snippet" ng-repeat='product in products | limitTo: 5 | filter: filter_name'>
+                <img src="{{ product.image }}" height="100">
+                <p>{{ product.name }}</p>
+                <p>({{ product.quantity }} left) </p>
+            </div>
+			<div class="center">
+				<a href="#/products">Show More...</a>
+			</div>
+			
+
+			<h4>Recent Orders</h4>
+
+			<ul ng-repeat="order in orders | orderBy:'date':true | limitTo: 3 | filter: filter_name">
+				<li>{{ order.name }} purchased {{ order.quantity }} {{ order.product }} on {{ order.date | date: "longDate" }}</li>
+			</ul>
+			
+				<div class="center">
+					<a href="#/orders">show all orders...</a>
+				</div>
+
+			<h4>New Customers</h4>
+			<ul ng-repeat="customer in customers | orderBy: 'date': true | limitTo: 3 | filter: filter_name">
+				<li>{{ customer.name }} joined the store on {{ customer.date | date: "longDate" }}</li>
+			</ul>
+
+				<div class="center">
+					<a href="#/customers">show all customers...</a>
+				</div>
+		</div>
+	</div>
+</div>

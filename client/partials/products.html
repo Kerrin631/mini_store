@@ -1,0 +1,39 @@
+<div ng-controller='productsController'>
+
+	<h3>Products</h3>
+	<div id="products">
+        <div id="left">
+            <input type="Text" placeholder='Search' ng-model='filter_name.name'><br>
+            <br>
+            <br>
+            
+            <h4>Add a new product</h4>
+
+            <form>
+                Name: <br>
+                <input type="text" ng-model='newProduct.name' placeholder='name...'><br><br>
+                Image (URL):<br>
+                <input type="text" ng-model='newProduct.image' placeholder='http://'><br><br>
+                Description:<br>
+                <textarea ng-model='newProduct.description' rows='5'></textarea><br><br>
+                Initial Quantity:<br>
+                <input type="text" ng-model='newProduct.quantity'>
+                <br>
+                <input type="submit" ng-click='createProduct()' value="Create">
+
+            </form>
+        </div>
+
+        <div id="right">
+            
+
+            <div id="product_snippet" ng-repeat='product in products | filter: filter_name'>
+                <img src="{{ product.image }}" height="100" ng-mouseover="showPopover()" ng-mouseleave="hidePopover()">
+                <!-- <div class="popover" ng-show="popoverIsVisible">{{ product.description }}</div> -->
+                <p>{{ product.name }}</p><br>
+                <p>{{ product.description }}</p>
+                <p>({{ product.quantity }} left) </p>
+            </div>
+        </div>
+    </div>
+</div>
